@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  Insta23
 //
-//  Created by Dmitry Kashlev on 11/3/17.
+//  Created by Dmitry Kashlev on 11/5/17.
 //  Copyright © 2017 Dmitry Kashlev. All rights reserved.
 //
 
@@ -16,7 +16,20 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    UIViewController *loginVC = [[LoginViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:loginVC];
+
     // Override point for customization after application launch.
+    if ([[Api client] isLoggedIn]) {
+        StreamViewController *streamVC = [[StreamViewController alloc] init];
+        [navController pushViewController:streamVC animated:NO];
+        [[Api client] loadStreamFromApi];
+
+    }
+    self.window.rootViewController = navController;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
