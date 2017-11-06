@@ -21,4 +21,12 @@ I prefer not to use NIBs or storyboard, as from past experience storyboards have
 I am a fan of modular code. You can see that I put all networking code inside the Api/Api class. This class conforms to the singleton pattern to ensure that there's only one client in the app that talks to the Instagram API. The singleton stores accessToken, user object, a stream (list of posts), and list of likes (post_id->like_list).
 
 If user has logged in before, he will not see the login screen. Opening the app will go straight to his media stream.
-the API's loadStreamFromApi is called every time the app launches. The recent media method of user's endpoint provides only the count of likes, but not the list of users that liked the post. In order to ascertain that any post was liked by the logged-in user, a separate API call is made to the likes endpoint for each post. This happens This is unfortunate because it results in this app's reaching the rate limit quickly. We get 500 requests per hour, which is easily reached by just a few runs of the app.
+the API's loadStreamFromApi is called every time the app launches. user/self/media/recent endpoint provides only the count of likes, but not the list of users that liked the post. In order to ascertain that any post was liked by the logged-in user, a separate API call is made to the media/##/likes endpoint for each post. This happens when a call to fetch entire stream is made. This is unfortunate because it results in this app's reaching the rate limit quickly. We get 500 requests per hour, which is easily reached by just a few runs of the app.
+
+The rationale for using AFNetworking library is to utilize the UIImage cache provided by that library. Also, if image is fetched from the URL, AFNetworking library provides ability to show the placeholder image in its place until the image has been fetched.
+
+
+Suggested improvements include:
+1) use Core Data with sqlite3 db for storing the stream and likes, instead of storing everything in memory. This will reduce number of API requests, so that there's no need to re-fetch likes for every post.
+2) implement a handler to handle refreshing of the feed. Swiping the stream down (like in current instagram app) would result in a new call to the user/self/media/recent endpoint to refresh the feed in the app
+3) 
