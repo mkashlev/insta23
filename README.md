@@ -22,9 +22,11 @@ I am a fan of modular code. You can see that I put all networking code inside th
 
 If user has logged in before, he will not see the login screen. Opening the app will go straight to his media stream.
 the API's loadStreamFromApi is called every time the app launches. user/self/media/recent endpoint provides only the count of likes, but not the list of users that liked the post. In order to ascertain that any post was liked by the logged-in user, a separate API call is made to the media/##/likes endpoint for each post. This happens when a call to fetch entire stream is made. This is unfortunate because it results in this app's reaching the rate limit quickly. We get 500 requests per hour, which is easily reached by just a few runs of the app.
+When a like or unlike action is performed, an API request is made to meida/##/likes endpoint to fetch the updated list of likes (that contains or does not contain your profile, depending on whether you liked or unliked the post). Then only the cell containing the post gets updated.
 
 The rationale for using AFNetworking library is to utilize the UIImage cache provided by that library. Also, if image is fetched from the URL, AFNetworking library provides ability to show the placeholder image in its place until the image has been fetched.
 
+NSNotificationCenter is used for communicating between ViewControllers and the API module.
 
 Suggested improvements include:
 1) use Core Data with sqlite3 db for storing the stream and likes, instead of storing everything in memory. This will reduce number of API requests, so that there's no need to re-fetch likes for every post.
