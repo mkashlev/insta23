@@ -28,6 +28,8 @@ The rationale for using AFNetworking library is to utilize the UIImage cache pro
 
 NSNotificationCenter is used for communicating between ViewControllers and the API module.
 
+NSUserDefaults is used to store the access token for persistence. When user exits the app and comes back, if he has logged in before, he sees the Stream right away. The stream is fetched upon entering the app, and if the API returns an invalid token error, user is redirected to the login screen automatically.
+
 Suggested improvements include:
 1) use Core Data with sqlite3 db for storing the stream and likes, instead of storing everything in memory. This will reduce number of API requests, so that there's no need to re-fetch likes for every post.
 2) implement a handler to handle refreshing of the feed. Swiping the stream down (like in current instagram app) would result in a new call to the user/self/media/recent endpoint to refresh the feed in the app
