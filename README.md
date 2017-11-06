@@ -26,6 +26,7 @@ NSUserDefaults is used to store the access token for persistence. When user exit
 
 Suggested improvements include:
 
-1. Use Core Data with sqlite3 db for storing the stream and likes, instead of storing everything in memory. This will reduce number of API requests, so that there's no need to re-fetch likes for every post.
+1. Use Core Data with sqlite3 db for storing the stream and likes, instead of storing everything in memory. This will reduce number of API requests, so that there's no need to re-fetch likes for every post. In addition, this will eliminate user wait every time he or she opens the app (since the fetching of stream can be done in the background to update the stream, whjile user can browse a cached/old version of the stream).
 2. Implement a handler to handle refreshing of the feed. Swiping the stream down (like in current instagram app) would result in a new call to the user/self/media/recent endpoint to refresh the feed in the app
+3. I'll think of more improvements and present at the meeting on Wednesday.
 
