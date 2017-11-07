@@ -20,7 +20,7 @@
     NSString *accessToken;
     NSURLSession *session;
     NSDictionary *user;
-    NSArray *stream;
+    NSMutableArray *stream;
     NSMutableDictionary *likes;
 }
 

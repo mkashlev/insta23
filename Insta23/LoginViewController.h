@@ -16,4 +16,6 @@
     UIWebView *loginScreen;
 }
 @property (strong, nonatomic) UILabel *loginStatus;
+@property (strong, nonatomic) UILabel *spinner;
+
 @end

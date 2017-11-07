@@ -20,5 +20,6 @@
 @property(strong, nonatomic) UILabel *info;
 @property(strong, nonatomic) UIButton *likeBtn;
 @property(strong, nonatomic) UIButton *unlikeBtn;
+@property(strong, nonatomic) UILabel *spinner;
 
 @end

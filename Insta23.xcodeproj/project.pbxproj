@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5EBDC98245EE1D0254A802C3 /* Pods_Insta23.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21EF29816734046CF4DE5C17 /* Pods_Insta23.framework */; };
 		8B3E75B81FAD66CE00BD0B4B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E75B71FAD66CE00BD0B4B /* AppDelegate.m */; };
-		8B3E75C11FAD66CE00BD0B4B /* Insta23.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E75BF1FAD66CE00BD0B4B /* Insta23.xcdatamodeld */; };
 		8B3E75C31FAD66CE00BD0B4B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B3E75C21FAD66CE00BD0B4B /* Assets.xcassets */; };
 		8B3E75C91FAD66CE00BD0B4B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E75C81FAD66CE00BD0B4B /* main.m */; };
 		8B3E75D21FAD676200BD0B4B /* Api.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B3E75D11FAD676200BD0B4B /* Api.m */; };
@@ -27,7 +26,6 @@
 		8B3E75B31FAD66CE00BD0B4B /* Insta23.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Insta23.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B3E75B61FAD66CE00BD0B4B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8B3E75B71FAD66CE00BD0B4B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8B3E75C01FAD66CE00BD0B4B /* Insta23.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Insta23.xcdatamodel; sourceTree = "<group>"; };
 		8B3E75C21FAD66CE00BD0B4B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B3E75C71FAD66CE00BD0B4B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B3E75C81FAD66CE00BD0B4B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -95,10 +93,6 @@
 				8B761FFC1FB0D69D00FA0165 /* Constants.h */,
 				8B3E75B61FAD66CE00BD0B4B /* AppDelegate.h */,
 				8B3E75B71FAD66CE00BD0B4B /* AppDelegate.m */,
-				8B3E75C21FAD66CE00BD0B4B /* Assets.xcassets */,
-				8B3E75C71FAD66CE00BD0B4B /* Info.plist */,
-				8B3E75C81FAD66CE00BD0B4B /* main.m */,
-				8B3E75BF1FAD66CE00BD0B4B /* Insta23.xcdatamodeld */,
 				8B3E75D31FAE570400BD0B4B /* LoginViewController.h */,
 				8B3E75D41FAE570400BD0B4B /* LoginViewController.m */,
 				8B3E75D61FAE677300BD0B4B /* StreamViewController.h */,
@@ -106,6 +100,7 @@
 				8B3E75D91FAE774300BD0B4B /* StreamTableViewCell.h */,
 				8B3E75DA1FAE774300BD0B4B /* StreamTableViewCell.m */,
 				8B3E75CF1FAD673A00BD0B4B /* api */,
+				8B761FFF1FB1195F00FA0165 /* MISC */,
 			);
 			path = Insta23;
 			sourceTree = "<group>";
@@ -117,6 +112,16 @@
 				8B3E75D11FAD676200BD0B4B /* Api.m */,
 			);
 			path = api;
+			sourceTree = "<group>";
+		};
+		8B761FFF1FB1195F00FA0165 /* MISC */ = {
+			isa = PBXGroup;
+			children = (
+				8B3E75C71FAD66CE00BD0B4B /* Info.plist */,
+				8B3E75C21FAD66CE00BD0B4B /* Assets.xcassets */,
+				8B3E75C81FAD66CE00BD0B4B /* main.m */,
+			);
+			name = MISC;
 			sourceTree = "<group>";
 		};
 		E9D586FAB4CF28C18B770919 /* Pods */ = {
@@ -259,7 +264,6 @@
 				8B3E75DB1FAE774300BD0B4B /* StreamTableViewCell.m in Sources */,
 				8B3E75D51FAE570400BD0B4B /* LoginViewController.m in Sources */,
 				8B3E75D81FAE677300BD0B4B /* StreamViewController.m in Sources */,
-				8B3E75C11FAD66CE00BD0B4B /* Insta23.xcdatamodeld in Sources */,
 				8B3E75C91FAD66CE00BD0B4B /* main.m in Sources */,
 				8B3E75B81FAD66CE00BD0B4B /* AppDelegate.m in Sources */,
 			);
@@ -378,10 +382,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2H343K5WKK;
+				DEVELOPMENT_TEAM = 975X8VQY3D;
 				INFOPLIST_FILE = Insta23/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mkashlev.Insta23;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mkashlev.Insta23me;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -393,10 +397,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2H343K5WKK;
+				DEVELOPMENT_TEAM = 975X8VQY3D;
 				INFOPLIST_FILE = Insta23/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.mkashlev.Insta23;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mkashlev.Insta23me;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -424,19 +428,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		8B3E75BF1FAD66CE00BD0B4B /* Insta23.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				8B3E75C01FAD66CE00BD0B4B /* Insta23.xcdatamodel */,
-			);
-			currentVersion = 8B3E75C01FAD66CE00BD0B4B /* Insta23.xcdatamodel */;
-			path = Insta23.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 8B3E75AB1FAD66CE00BD0B4B /* Project object */;
 }

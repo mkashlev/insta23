@@ -52,6 +52,10 @@
         [self.unlikeBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
         [self.unlikeBtn setTitleColor:[UIColor redColor] forState:UIControlStateHighlighted];
         
+        //spinner
+        self.spinner = [[UILabel alloc] init];
+        [self.spinner setText:@"..."];
+        self.spinner.frame = CGRectMake(self.frame.size.width-60, offsetY+5, 40, 40);
         
         //info such as status of like
         self.info = [[UILabel alloc] initWithFrame:CGRectMake(20, offsetY, self.frame.size.width-buttonWidth, infoHeight)];

@@ -23,7 +23,7 @@
     if (self = [super init]) {
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
         session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
-        stream = @[];
+        stream = [[NSMutableArray alloc] init];
         likes = [[NSMutableDictionary alloc] init];
     }
     return self;
@@ -159,7 +159,7 @@
                         // Success Parsing JSON
                         int code = [[[jsonResponse objectForKey:@"meta"] objectForKey:@"code"] intValue];
                         if (code == 200) {
-                            stream = (NSArray *)[jsonResponse objectForKey:@"data"];
+                            stream = (NSMutableArray *)[jsonResponse objectForKey:@"data"];
                             
                             //Need to collect likes too
                             for (NSDictionary *itm in stream) {
@@ -214,9 +214,9 @@
                     } else {
                         // Success Parsing JSON
                         NSArray *l = (NSArray *)[jsonResponse objectForKey:@"data"];
+                        
                         [likes setObject:l forKey:post_id];
                         [[NSNotificationCenter defaultCenter] postNotificationName:NC_LIKES_LOADED_SIGNAL object:nil userInfo:@{@"media_id": post_id}];
-                        NSLog(@"LIKES LOADED FROM API");
                     }
                 }  else {
                     //Web server is returning an error

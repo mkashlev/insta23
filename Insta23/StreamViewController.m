@@ -56,6 +56,14 @@
                                    target:self
                                    action:@selector(handleLogout:)];
     self.navigationItem.rightBarButtonItem = logoutButton;
+    
+    //spinner
+    self.spinner = [[UILabel alloc] initWithFrame:CGRectMake(30, (self.view.frame.size.height/2)-25, self.view.frame.size.width-60, 50)];
+    [self.spinner setTextAlignment:NSTextAlignmentCenter];
+    [self.spinner setBackgroundColor:[UIColor whiteColor]];
+    [self.spinner setText:@"Loading the Stream..."];
+    [self.tableView addSubview:self.spinner];
+    
 }
 
 
@@ -129,12 +137,20 @@
     [cell.likeBtn addTarget:self action:@selector(doLike:) forControlEvents:UIControlEventTouchUpInside];
     [cell.unlikeBtn addTarget:self action:@selector(doUnlike:) forControlEvents:UIControlEventTouchUpInside];
     
+    //set position of spinner to the same origin as button
+    CGRect spinframe = cell.spinner.frame;
+    spinframe.origin.y = height+userframe.size.height;
+    spinframe.origin.x = screenwidth-60;
+    [cell.spinner setFrame:spinframe];
+    
     // set info label
     CGRect infoframe = cell.info.frame;
     infoframe.origin.y = height+userframe.size.height;
     infoframe.size.width = screenwidth-100;
     [cell.info setFrame:infoframe];
     NSArray *likesForMedia = [likes objectForKey:mediaId];
+
+    int numLikes = (int)[likesForMedia count];
     BOOL youDidLike = NO;
     for (NSDictionary *like in likesForMedia) {
         if (like && [[like objectForKey:@"id"] isEqualToString:[[[Api client] getUser] objectForKey:@"id"]]) {
@@ -142,12 +158,18 @@
             break;
         }
     }
+    [cell.spinner removeFromSuperview];
+    //int numLikes = [[[[stream objectAtIndex:indexPath.row] objectForKey:@"likes"] objectForKey:@"count"] intValue];
+    
+    int numLikesMinusYou = numLikes - 1;
     if (youDidLike) {
-        [cell.info setText:@"Liked by You"];
+        NSString *likeText = (numLikesMinusYou > 0) ? [NSString stringWithFormat:@"Liked by You and %d others.",numLikesMinusYou] : @"Liked by You";
+        [cell.info setText:likeText];
         [cell.likeBtn removeFromSuperview];
         [cell.contentView addSubview:cell.unlikeBtn];
     } else {
-        [cell.info setText:@"No Likes"];
+        NSString *likeText = (numLikes > 0) ? [NSString stringWithFormat:@"Liked by %d people.",numLikes] : @"No Likes";
+        [cell.info setText:likeText];
         [cell.unlikeBtn removeFromSuperview];
         [cell.contentView addSubview:cell.likeBtn];
     }
@@ -157,6 +179,7 @@
     stream = [[Api client] getStream];
     likes = [[Api client] getLikes];
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self.spinner removeFromSuperview];
         [self.tableView reloadData];
     });
 }
@@ -214,6 +237,16 @@
 // Like/Unlike/Logout action handlers
 - (IBAction)doLike:(id)sender {
     NSLog(@"clicked like");
+    UIView *parent = [sender superview];
+    while (parent && ![parent isKindOfClass:[StreamTableViewCell class]]) {
+        parent = parent.superview;
+    }
+    [(UIButton *)sender removeFromSuperview];
+    if (parent && [parent isKindOfClass:[StreamTableViewCell class]]) {
+        StreamTableViewCell *cell = ((StreamTableViewCell *)parent);
+        [cell.contentView addSubview:cell.spinner];
+    }
+    
     CGPoint buttonOriginInTableView = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonOriginInTableView];
     NSString *imgid = [[stream objectAtIndex:indexPath.row] objectForKey:@"id"];
@@ -221,6 +254,17 @@
 }
 - (IBAction)doUnlike:(id)sender {
     NSLog(@"clicked unlike");
+    UIView *parent = [sender superview];
+    while (parent && ![parent isKindOfClass:[StreamTableViewCell class]]) {
+        parent = parent.superview;
+    }
+    [(UIButton *)sender removeFromSuperview];
+    if (parent && [parent isKindOfClass:[StreamTableViewCell class]]) {
+        StreamTableViewCell *cell = ((StreamTableViewCell *)parent);
+        NSLog(@"%@",cell.spinner);
+        [cell.contentView addSubview:cell.spinner];
+    }
+    
     CGPoint buttonOriginInTableView = [sender convertPoint:CGPointZero toView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:buttonOriginInTableView];
     NSString *imgid = [[stream objectAtIndex:indexPath.row] objectForKey:@"id"];

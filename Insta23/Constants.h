@@ -13,7 +13,7 @@
 #define BASE_URL @"https://api.instagram.com"
 #define CLIENT_ID @"0637825256de4d9e9c969ec594b032c8"
 #define REDIRECT_URI @"https://www.23andme.com"
-#define INSTAGRAM_SCOPE @"likes"
+#define INSTAGRAM_SCOPE @"public_content+likes"
 
 //UI Constants
 #define kCELL_ID @"StreamItem"

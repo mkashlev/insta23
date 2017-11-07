@@ -31,18 +31,24 @@
     
     [self setTitle:@"Instagram Login"];
     
-    NSInteger offsetX = 10;
+    NSInteger offsetX = 30;
     NSInteger offsetY = 100;
     NSInteger defaultWidth = self.view.bounds.size.width-(offsetX*2);
     
-    self.loginStatus = [[UILabel alloc] initWithFrame:CGRectMake(offsetX, offsetY, defaultWidth, 50)];
-    if ([[Api client] isLoggedIn]) {
-        [self.loginStatus setText:@"Logged in!"];
-    } else {
-        [self.loginStatus setText:@"Not Logged in!"];
-    }
-    [self.view addSubview:self.loginStatus];
-    offsetY += (self.loginStatus.frame.size.height+20);
+//    self.loginStatus = [[UILabel alloc] initWithFrame:CGRectMake(offsetX, offsetY, defaultWidth, 50)];
+//    if ([[Api client] isLoggedIn]) {
+//        [self.loginStatus setText:@"Logged in!"];
+//    } else {
+//        [self.loginStatus setText:@"Not Logged in!"];
+//    }
+//    [self.view addSubview:self.loginStatus];
+//    offsetY += (self.loginStatus.frame.size.height+20);
+    
+    //spinner
+    self.spinner = [[UILabel alloc] initWithFrame:CGRectMake(offsetX, (self.view.frame.size.height/2)-25, defaultWidth, 50)];
+    [self.spinner setTextAlignment:NSTextAlignmentCenter];
+    [self.spinner setBackgroundColor:[UIColor whiteColor]];
+    [self.spinner setText:@"Please Wait"];
     
     if ([[Api client] isLoggedIn]) {
         UIButton *logoutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -55,6 +61,11 @@
     else {
         UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         loginButton.frame = CGRectMake(offsetX, offsetY, defaultWidth, 50);
+        loginButton.layer.borderWidth = 2.0f;
+        loginButton.layer.cornerRadius = 5.0f;
+        loginButton.layer.borderColor = [UIColor blueColor].CGColor;
+        [loginButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [loginButton.layer setMasksToBounds:YES];
         [loginButton setTitle:@"Login" forState:UIControlStateNormal];
         [loginButton addTarget:self action:@selector(displayLoginView:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:loginButton];
@@ -71,13 +82,16 @@
     loginScreen = [[UIWebView alloc] initWithFrame:self.view.frame];
     [loginScreen loadRequest:[[Api client] createAuthRequest]];
     [loginScreen setDelegate:self];
+    [loginScreen addSubview:self.spinner];
     [self.view addSubview:loginScreen];
 }
 
 //handles logic for logout button (not used)
 - (IBAction)handleLogout:(id)sender {
     [[Api client] logout];
-    [self.loginStatus setText:@"Not Logged in..."];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [self.loginStatus setText:@"Not Logged in..."];
+//    });
 }
 
 //handles callback from instagram API on login.
@@ -85,13 +99,14 @@
     NSString *val = [[Api client] checkRequestForCallbackURL:request];
     StreamViewController *streamVC = [[StreamViewController alloc] init];
     if ([val isEqualToString:AUTH_AUTHENTICATED]) {
-        [self.loginStatus setText:@"Logged In!"];
+        //[self.loginStatus setText:@"Logged In!"];
         [self.navigationController pushViewController:streamVC animated:NO];
         [loginScreen removeFromSuperview];
     } else if ([val isEqualToString:AUTH_AUTHORIZED]) {
         [loginScreen removeFromSuperview];
         [self.navigationController pushViewController:streamVC animated:NO];
     }
+    [self.spinner removeFromSuperview];
     return [val isEqualToString:@""];
 }
 

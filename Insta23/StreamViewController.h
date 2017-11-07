@@ -18,4 +18,6 @@
 
 @interface StreamViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
 
+@property (strong, nonatomic) UILabel *spinner;
+
 @end
