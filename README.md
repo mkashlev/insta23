@@ -20,7 +20,7 @@ If user has logged in before, he will not see the login screen. Opening the app 
 
 The rationale for using AFNetworking library is to utilize the UIImage cache provided by that library. Also, if image is fetched from the URL, AFNetworking library provides ability to show the placeholder image in its place until the image has been fetched.
 
-NSNotificationCenter is used for communicating between ViewControllers and the API module. I chose NotificationCenter instead of delegation because I wanted to keep API module truly independent and not reference any controllers or ui-specific classes inside of it.
+NSNotificationCenter is used for communicating between ViewControllers and the API module. I chose NotificationCenter instead of delegation because I wanted to keep API module truly independent and not reference any controllers/views or ui-specific classes inside of it.
 
 NSUserDefaults is used to store the access token for persistence. When user exits the app and comes back, if he has logged in before, he sees the Stream right away. The stream is fetched upon entering the app, and if the API returns an invalid token error, user is redirected to the login screen automatically.
 
